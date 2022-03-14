@@ -178,6 +178,9 @@ function getDelivery() {
     var k = "";
     try {
         k = document.querySelectorAll("#J-From")[0].textContent
+        if(!k){
+            k=document.getElementById("#J_deliveryAdd")[0].textContent;
+        }
     } catch (k) {
     }
     return k;
@@ -244,7 +247,10 @@ function getProperties() {
 
 function isFull() {
     var k = document.getElementsByClassName("J_TSaleProp");
-    "object" != typeof k && "" !== k && null != k || "object" == typeof k && 0 < k.length || (k = document.querySelectorAll("ul.tb-cleafix"));
+    "object" != typeof k && "" !== k && null != k || "object" == typeof k && 0 < k.length
+     || (k = document.querySelectorAll("ul .tb-clearfix"))
+     || (k = document.querySelectorAll("ul .tm-clear"))
+     ;
     var _ = !0;
     if (0 < k.length) {
         for (var t = 0, c = 0; c < k.length; c++) {
@@ -263,7 +269,7 @@ function getItemTittle(){
             var _ = document.getElementsByClassName("tb-detail-hd")[0];
             k = 0 < _.getElementsByTagName("h3").length && null != _ ? _.getElementsByTagName("h3")[0] : _.getElementsByTagName("h1")[0]
         }
-        return "" === k.textContent && 0 < document.getElementsByClassName("tb-tit").length && (k = document.getElementsByClassName("tb-tit")[0]), "" === k.textContent && (null != (k = document.querySelectorAll("h3.tb-item-title")) ? k = k[0] : 0 < (k = document.getElementsByClassName("tb-item-title")).length && (k = k[0])), k.textContent;
+        return "" === k.textContent && 0 < document.getElementsByClassName("tb-title").length && (k = document.getElementsByClassName("tb-title")[0]), "" === k.textContent && (null != (k = document.querySelectorAll("h3.tb-item-title")) ? k = k[0] : 0 < (k = document.getElementsByClassName("tb-item-title")).length && (k = k[0])), k.textContent;
     } catch (k) {
         return "";
     }
@@ -273,23 +279,35 @@ function  getSellerID() {
     var k = "";
     if (document.querySelector('meta[name="microscope-data"]')) try {
         var _ = document.querySelector('meta[name="microscope-data"]').getAttribute("content");
+        console.log("_ :" +_)
         if (_) {
             var t = _.split(";");
-            if (0 < t.length) for (var c = 0; c < t.length; c++) {
-                var n = t[c], e = (n = n.trim()).split("="), i = e[0], v = e[1];
+            console.log('t:' +t);   
+            if (0 < t.length) 
+            for (var c = 0; c < t.length; c++) {
+                var n = t[c];
+                console.log('n : ' +n)
+                var e = (n = n.trim()).split("="); 
+                console.log('e :' +e)
+                var i = e[0];
+                console.log('i :'+i)
+                var v = e[1];
+                console.log('v :' +v)
                 if ("shopId" == i) {
                     k = v;
                     console.log('k: v :' +k)
+                    console.log('i : ' + i +'  e "'+e);
                     break
                 }
             }
         }
     } catch (k) {
-    } else try {
-        k = (document.querySelector(".shop-title-text") ? 
+    } else 
+        try {
+            k = (document.querySelector(".shop-title-text") ? 
                 document.querySelector(".shop-title-text").getAttribute("href") 
                :document.querySelectorAll(".tb-shop-name")[0].getElementsByTagName("h3")[0].getElementsByTagName("a")[0].getAttribute("href")).replace("//shop", "").split(".")[0]
-    } catch (k) {
+        } catch (k) {
         console.log('catch : ' +k);
     }
     console.log('k : đâsdsdas '+ k)

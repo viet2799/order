@@ -7,8 +7,10 @@ function setZIndex() {
         try {
             $('#detail').css('z-index', 100);
             var layouts = document.getElementsByClassName('layout');
+            console.log(layouts)
             for (let i = 0; i < layouts.length; i++) {
                 layouts[i].style.zIndex = 100;
+
             }
             $('#J_TabBarWrap').css('z-index', 100);
         } catch (e) {
@@ -183,7 +185,6 @@ var order_count = 0;
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("Action: " + request.action);
-
     if (request.action === "afterGetAppendage") {
         console.log("after get appendage");
         console.log('loi khi k chon thuoc tinh')

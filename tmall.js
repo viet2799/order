@@ -22,7 +22,6 @@ const tmall = function () {
         });
     }
 };
-console.log('abc')
 const tmall_getter = function () {
     this.getImageLink = function () {
         return getImageLink();
